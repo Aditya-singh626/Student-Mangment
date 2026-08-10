@@ -1,0 +1,443 @@
+@import url("https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,500&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap");
+
+:root {
+    /* Core navy + white palette */
+    --ink: #0f2a52;
+    --ink-2: #153a6e;
+    --parchment: #f5f8fc;
+    --paper-line: #dbe4f3;
+    --gold: #2557d6;
+    --gold-soft: #86aef2;
+    --charcoal: #15213d;
+    --muted: #64708a;
+    --error: #b3352b;
+    --error-soft: rgba(179, 53, 43, 0.09);
+
+    /* Role accents — all within the blue family, varying in depth */
+    --student: #2f6fe4;
+    --faculty: #1c4c9c;
+    --admin: #0b2c56;
+
+    /* Dedicated status colors, decoupled from role accents */
+    --danger: #b3352b;
+    --danger-soft: rgba(179, 53, 43, 0.09);
+    --danger-border: rgba(179, 53, 43, 0.28);
+    --success: #1f7a4d;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+.auth-shell {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1.05fr 1fr;
+    font-family: "Inter", sans-serif;
+    color: var(--charcoal);
+    background: var(--parchment);
+}
+
+/* ---------------------------------------------- */
+/* LEFT PANEL — masthead / ID card                 */
+/* ---------------------------------------------- */
+
+.auth-left {
+    position: relative;
+    background:
+        radial-gradient(circle at 18% 12%, rgba(255, 255, 255, 0.08), transparent 40%),
+        linear-gradient(160deg, var(--ink) 0%, var(--ink-2) 100%);
+    color: #f3f6fc;
+    padding: 56px 56px 40px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    --accent: var(--gold);
+}
+
+.auth-left::before {
+    content: "";
+    position: absolute;
+    inset: 18px;
+    border: 1px solid rgba(243, 246, 252, 0.14);
+    pointer-events: none;
+}
+
+.auth-eyebrow {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 12px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--gold-soft);
+    margin-bottom: 18px;
+}
+
+.auth-heading {
+    font-family: "Fraunces", serif;
+    font-weight: 500;
+    font-size: clamp(34px, 4vw, 46px);
+    line-height: 1.08;
+    max-width: 11ch;
+    margin: 0 0 14px;
+}
+
+.auth-subheading {
+    font-size: 15px;
+    line-height: 1.6;
+    color: rgba(243, 246, 252, 0.72);
+    max-width: 38ch;
+    margin: 0 0 40px;
+}
+
+/* Role tabs */
+
+.role-tabs {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 36px;
+}
+
+.role-tab {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 12px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 9px 14px;
+    border-radius: 999px;
+    border: 1px solid rgba(243, 246, 252, 0.25);
+    background: transparent;
+    color: rgba(243, 246, 252, 0.68);
+    cursor: pointer;
+    transition: all 0.18s ease;
+}
+
+.role-tab:hover {
+    border-color: rgba(243, 246, 252, 0.55);
+    color: #f3f6fc;
+}
+
+.role-tab.active {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #ffffff;
+    font-weight: 500;
+}
+
+/* The signature element: a live-updating ID card */
+
+.id-card-wrap {
+    margin-top: auto;
+}
+
+.id-card {
+    position: relative;
+    width: 100%;
+    max-width: 360px;
+    border-radius: 14px;
+    background: linear-gradient(155deg, #ffffff 0%, #eaf1fc 100%);
+    color: var(--charcoal);
+    padding: 22px 22px 18px;
+    box-shadow: 0 30px 60px -20px rgba(6, 20, 46, 0.55);
+    border-top: 6px solid var(--accent);
+    transition: border-color 0.25s ease;
+}
+
+.id-card-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 22px;
+}
+
+.id-card-org {
+    font-family: "Fraunces", serif;
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+}
+
+.id-card-org span {
+    display: block;
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 10px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-top: 2px;
+}
+
+.id-card-role {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 5px 10px;
+    border-radius: 999px;
+    background: var(--accent);
+    color: #ffffff;
+    font-weight: 500;
+}
+
+.id-card-body {
+    display: flex;
+    gap: 14px;
+    align-items: center;
+}
+
+.id-card-avatar {
+    width: 54px;
+    height: 54px;
+    border-radius: 50%;
+    background: var(--ink);
+    color: var(--gold-soft);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: "Fraunces", serif;
+    font-size: 20px;
+    font-weight: 500;
+    flex-shrink: 0;
+}
+
+.id-card-name {
+    font-size: 17px;
+    font-weight: 600;
+    line-height: 1.2;
+    margin-bottom: 4px;
+    min-height: 20px;
+}
+
+.id-card-name.placeholder {
+    color: var(--muted);
+    font-weight: 400;
+    font-style: italic;
+}
+
+.id-card-number {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 12px;
+    letter-spacing: 0.04em;
+    color: var(--muted);
+}
+
+.id-card-foot {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 18px;
+    padding-top: 14px;
+    border-top: 1px dashed var(--paper-line);
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+}
+
+/* Compact variant — for dashboard headers, unused by default but kept for reuse */
+
+.id-card--compact {
+    max-width: none;
+    width: auto;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 12px 20px;
+    border-top: none;
+    border-left: 4px solid var(--accent);
+    box-shadow: 0 8px 24px -14px rgba(6, 20, 46, 0.4);
+}
+
+.id-card--compact .id-card-top,
+.id-card--compact .id-card-foot {
+    display: none;
+}
+
+.id-card--compact .id-card-body {
+    gap: 12px;
+}
+
+.id-card--compact .id-card-avatar {
+    width: 40px;
+    height: 40px;
+    font-size: 15px;
+}
+
+.id-card--compact .id-card-name {
+    font-size: 14px;
+    min-height: 0;
+    margin-bottom: 2px;
+}
+
+.id-card--compact .id-card-number {
+    font-size: 11px;
+}
+
+/* ---------------------------------------------- */
+/* RIGHT PANEL — the actual form                   */
+/* ---------------------------------------------- */
+
+.auth-right {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 56px 72px;
+    --accent: var(--gold);
+}
+
+.auth-form-wrap {
+    width: 100%;
+    max-width: 420px;
+    margin: 0 auto;
+}
+
+.auth-form-title {
+    font-family: "Fraunces", serif;
+    font-size: 26px;
+    font-weight: 500;
+    margin: 0 0 6px;
+}
+
+.auth-form-switch {
+    font-size: 14px;
+    color: var(--muted);
+    margin-bottom: 34px;
+}
+
+.auth-form-switch a {
+    color: var(--accent);
+    font-weight: 600;
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+}
+
+.auth-form-switch a:hover {
+    border-bottom-color: var(--accent);
+}
+
+.field-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+}
+
+.field {
+    margin-bottom: 20px;
+}
+
+.field label {
+    display: block;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    font-family: "IBM Plex Mono", monospace;
+    margin-bottom: 8px;
+}
+
+.field input,
+.field select {
+    width: 100%;
+    background: transparent;
+    border: none;
+    border-bottom: 1.5px solid var(--paper-line);
+    padding: 8px 2px 10px;
+    font-size: 15px;
+    font-family: "Inter", sans-serif;
+    color: var(--charcoal);
+    outline: none;
+    transition: border-color 0.18s ease;
+}
+
+.field input:disabled {
+    color: var(--muted);
+}
+
+.field select {
+    appearance: none;
+    background-image: linear-gradient(45deg, transparent 50%, var(--muted) 50%),
+        linear-gradient(135deg, var(--muted) 50%, transparent 50%);
+    background-position: calc(100% - 4px) 14px, calc(100% - 0px) 14px;
+    background-size: 6px 6px;
+    background-repeat: no-repeat;
+}
+
+.field input:focus,
+.field select:focus {
+    border-bottom-color: var(--accent);
+}
+
+.field input::placeholder {
+    color: #a9b3c9;
+}
+
+.auth-submit {
+    width: 100%;
+    margin-top: 10px;
+    padding: 14px 18px;
+    background: var(--ink);
+    color: #f3f6fc;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    cursor: pointer;
+    transition: background 0.18s ease, transform 0.1s ease;
+}
+
+.auth-submit:hover:not(:disabled) {
+    background: var(--accent);
+    color: #ffffff;
+}
+
+.auth-submit:active:not(:disabled) {
+    transform: translateY(1px);
+}
+
+.auth-submit:disabled {
+    opacity: 0.55;
+    cursor: not-allowed;
+}
+
+.auth-error {
+    background: var(--danger-soft);
+    border: 1px solid var(--danger-border);
+    color: var(--danger);
+    font-size: 13px;
+    padding: 10px 14px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+.field-hint {
+    font-size: 12px;
+    color: var(--muted);
+    margin-top: -12px;
+    margin-bottom: 20px;
+}
+
+@media (max-width: 880px) {
+    .auth-shell {
+        grid-template-columns: 1fr;
+    }
+
+    .auth-left {
+        padding: 40px 28px;
+    }
+
+    .id-card-wrap {
+        margin-top: 40px;
+    }
+
+    .auth-right {
+        padding: 40px 28px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .role-tab,
+    .auth-submit,
+    .id-card {
+        transition: none;
+    }
+}
