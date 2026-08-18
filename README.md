@@ -5,7 +5,7 @@ A full-stack Student Management System built with **React.js, Node.js, Express.j
 ## 🚀 Live Demo
 
 **Frontend:**  
-https://student-management-frontend-hpkz.onrender.com/login
+https://student-management-frontend-hpkz.onrender.com/
 
 **Backend:**  
 https://student-management-backend-hy37.onrender.com/
