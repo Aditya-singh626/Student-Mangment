@@ -2,6 +2,14 @@
 
 A full-stack Student Management System built with **React.js, Node.js, Express.js, MySQL, and JWT authentication**. The application provides role-based access for **students, faculty, and administrators** and includes modules for student profiles, attendance, academic records, subjects, and authentication.
 
+## 🚀 Live Demo
+
+**Frontend:**  
+https://student-management-frontend-hpkz.onrender.com/login
+
+**Backend:**  
+https://student-management-backend-hy37.onrender.com/
+
 ## Features
 
 ### Authentication & Authorization
