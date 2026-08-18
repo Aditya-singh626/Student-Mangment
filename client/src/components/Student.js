@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from "react";
 import "../styles.css";
 
+const API_URL =
+  process.env.REACT_APP_API_URL || "http://localhost:4000/api";
+
 const Student = ({ user }) => {
   const [subjects, setSubjects] = useState([]);
   const [activities, setActivities] = useState([]);
@@ -17,10 +20,10 @@ const Student = ({ user }) => {
 
         // Fetch subjects and activities created for that specific student
         const [subRes, actRes] = await Promise.all([
-          fetch(`http://localhost:4000/api/24UADS1073/subjects/${rollNumber}`, {
+          fetch(`${API_URL}/24UADS1073/subjects/${rollNumber}`, {
             headers: { Authorization: `Bearer ${token}` },
           }),
-          fetch(`http://localhost:4000/api/24UADS1073/activities/${rollNumber}`, {
+          fetch(`${API_URL}/24UADS1073/activities/${rollNumber}`, {
             headers: { Authorization: `Bearer ${token}` },
           }),
         ]);
