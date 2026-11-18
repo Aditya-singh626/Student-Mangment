@@ -4,6 +4,7 @@ const express = require("express");
 const cors = require("cors");
 
 const pool = require("./db");
+const { initializeDatabase } = pool;
 
 const authRoutes = require("./routes/auth");
 const studentRoutes = require("./routes/studentRoutes");
@@ -170,23 +171,18 @@ app.use((err, req, res, next) => {
 
 const PORT = process.env.PORT || 4000;
 
-app.listen(PORT, async () => {
-
-    console.log(`✅ Server running on port ${PORT}`);
-
+async function startServer() {
     try {
+        await initializeDatabase();
+        console.log("✅ Database schema initialized");
 
-        const connection = await pool.getConnection();
-
-        console.log("✅ MySQL connected successfully");
-
-        connection.release();
-
+        app.listen(PORT, () => {
+            console.log(`✅ Server running on port ${PORT}`);
+        });
     } catch (error) {
-
-        console.error(
-            "❌ MySQL connection failed:",
-            error.message
-        );
+        console.error("❌ Database initialization failed:", error.message);
+        process.exitCode = 1;
     }
-});
+}
+
+startServer();
